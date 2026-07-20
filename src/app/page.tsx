@@ -1425,7 +1425,7 @@ export default function HomePage() {
               </span>
             </div>
             <p className="text-[9px] sm:text-xs text-[#878787]">
-              © 2024 Flipkart Clone. All rights reserved.
+              © 2024 Flipkart. All rights reserved.   {/* 👈 "Clone" removed */}
             </p>
           </div>
         </div>
