@@ -1,6 +1,8 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic'; // ← Prevent static generation
+
 export async function GET() {
   try {
     const [categoryCount, subCategoryCount, productCount, bannerCount, cartCount, priceAgg, featuredCount] = await Promise.all([
