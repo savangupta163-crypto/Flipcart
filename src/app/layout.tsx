@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Flipkart  - Online Shopping India",
+  title: "Flipkart - Online Shopping India",
   description: "India's biggest online store for Mobiles, Fashion, Electronics, Home & more. Best prices & offers.",
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>",
