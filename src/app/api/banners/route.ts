@@ -1,6 +1,8 @@
 import { db } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic'; // 👈 Add this line
+
 export async function GET() {
   try {
     const banners = await db.banner.findMany({ orderBy: { order: 'asc' } });
