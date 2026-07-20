@@ -135,7 +135,7 @@ function HeaderSkeleton() {
 function BannerSkeleton() {
   return (
     <div className="w-full max-w-[1400px] mx-auto px-2">
-      <div className="relative w-full aspect-[4/3] xs:aspect-[16/9] sm:aspect-[16/6] md:aspect-[16/5] lg:aspect-[16/4] rounded-sm bg-gray-200">
+      <div className="relative w-full aspect-[16/5] md:aspect-[16/4] rounded-sm bg-gray-200">
         <Skeleton className="w-full h-full rounded-sm" />
       </div>
     </div>
@@ -1116,7 +1116,7 @@ export default function HomePage() {
             {homeData?.banners && homeData.banners.length > 0 && (
               <div className="max-w-[1400px] mx-auto px-2 mb-2 sm:mb-3">
                 <div className="relative rounded-sm overflow-hidden shadow-sm bg-gray-100">
-                  <div className="relative w-full aspect-[4/3] xs:aspect-[16/9] sm:aspect-[16/6] md:aspect-[16/5] lg:aspect-[16/4]">
+                  <div className="relative w-full aspect-[16/5] md:aspect-[16/4]">
                     <AnimatePresence mode="wait">
                       {homeData.banners[currentBanner]?.image === 'custom-diwali' ? (
                         <motion.div
@@ -1130,41 +1130,27 @@ export default function HomePage() {
                           <CustomBanner />
                         </motion.div>
                       ) : (
-                        <motion.div
+                        <motion.img
                           key={currentBanner}
+                          src={homeData.banners[currentBanner]?.image}
+                          alt={homeData.banners[currentBanner]?.title}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.5 }}
-                          className="absolute inset-0 w-full h-full"
-                        >
-                          {/* Blurred, scaled copy fills the box edge-to-edge so there's never an empty
-                              letterbox gap, while the sharp image below is never cropped. */}
-                          <img
-                            src={homeData.banners[currentBanner]?.image}
-                            alt=""
-                            aria-hidden="true"
-                            className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
-                            onError={handleImgError}
-                          />
-                          <img
-                            src={homeData.banners[currentBanner]?.image}
-                            alt={homeData.banners[currentBanner]?.title}
-                            className="absolute inset-0 w-full h-full object-contain"
-                            onError={handleImgError}
-                          />
-                        </motion.div>
+                          className="absolute inset-0 w-full h-full object-cover"
+                          onError={handleImgError}
+                        />
                       )}
                     </AnimatePresence>
-                    {/* subtle bottom scrim so pagination dots stay legible over any banner image */}
-                    <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 sm:h-12 bg-gradient-to-t from-black/25 to-transparent" />
                   </div>
 
+                  {/* Navigation Buttons - only show if more than 1 banner */}
                   {homeData.banners.length > 1 && (
                     <>
                       <button
                         onClick={() => goToBanner((currentBanner - 1 + homeData.banners.length) % homeData.banners.length)}
-                        className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-1 sm:p-1.5 shadow-md transition-colors z-10"
+                        className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md transition-colors z-10"
                         aria-label="Previous banner"
                       >
                         <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-[#212121]" />
@@ -1172,21 +1158,21 @@ export default function HomePage() {
 
                       <button
                         onClick={() => goToBanner((currentBanner + 1) % homeData.banners.length)}
-                        className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-1 sm:p-1.5 shadow-md transition-colors z-10"
+                        className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md transition-colors z-10"
                         aria-label="Next banner"
                       >
                         <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-[#212121]" />
                       </button>
 
-                      <div className="absolute bottom-1.5 sm:bottom-3 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-1.5 z-10">
+                      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
                         {homeData.banners.map((_, idx) => (
                           <button
                             key={idx}
                             onClick={() => goToBanner(idx)}
                             className={`rounded-full transition-all duration-300 ${
                               idx === currentBanner
-                                ? 'bg-white w-4 h-1.5 sm:w-5 sm:h-2'
-                                : 'bg-white/50 hover:bg-white/70 w-1.5 h-1.5 sm:w-2 sm:h-2'
+                                ? 'bg-white w-5 h-1.5 sm:w-6 sm:h-2'
+                                : 'bg-white/60 hover:bg-white/80 w-1.5 h-1.5 sm:w-2 sm:h-2'
                             }`}
                             aria-label={`Go to slide ${idx + 1}`}
                           />
